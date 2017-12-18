@@ -1,0 +1,61 @@
+
+package services;
+
+import java.util.Collection;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import repositories.ActivityRepository;
+import domain.Activity;
+
+@Service
+@Transactional
+public class ActivityService {
+
+	//Managed Repository =============================================================================
+
+	@Autowired
+	private ActivityRepository	activityRepository;
+
+
+	//Simple CRUD methods ============================================================================
+
+	//Other Business Methods =========================================================================
+
+	public Collection<Activity> findActivitiesByGymId(int gymId) {
+
+		Collection<Activity> activities;
+
+		activities = activityRepository.findActivitiesByGymId(gymId);
+		return activities;
+	}
+
+	public Collection<Activity> findActivitiesNotClosed() {
+
+		Collection<Activity> activities;
+
+		activities = activityRepository.findActivitiesNotClosed();
+		return activities;
+	}
+
+	public Activity findOne(int activityId) {
+		// TODO Auto-generated method stub
+		Activity activity;
+
+		activity = activityRepository.findOne(activityId);
+
+		return activity;
+	}
+
+	public Collection<Activity> search(String keyword, String day, String time) {
+		Collection<Activity> activities;
+
+		activities = activityRepository.search(keyword, day, time);
+
+		return activities;
+	}
+
+}

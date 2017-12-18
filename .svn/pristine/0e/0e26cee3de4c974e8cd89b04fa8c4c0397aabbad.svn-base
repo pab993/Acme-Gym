@@ -1,0 +1,23 @@
+# messages.properties
+#
+# Copyright (C) 2017 Universidad de Sevilla
+# 
+# The use of this project is hereby constrained to the conditions of the 
+# TDG Licence, a copy of which you may download from 
+# http://www.tdg-seville.info/License.html
+
+activity.pictures				=	Pictures
+activity.title					=	Title
+activity.description			=	Description
+activity.day					=	Day
+activity.startTime				=	Activity start time
+activity.endTime				=	Activity end time
+activity.availableSeats			=	Available seats
+activity.listOfTrainers			= 	Trainers
+activity.listGym				=	Gym
+activity.cancel					= 	Back to the main page
+
+searchTemplate.keyword			= Keyword
+searchTemplate.day				= Day
+searchTemplate.time				= Time
+searchTemplate.search			= Search

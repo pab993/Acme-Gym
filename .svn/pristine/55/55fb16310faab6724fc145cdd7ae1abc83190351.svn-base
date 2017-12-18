@@ -1,0 +1,36 @@
+# messages_es.properties
+#
+# Copyright (C) 2017 Universidad de Sevilla
+# 
+# The use of this project is hereby constrained to the conditions of the 
+# TDG Licence, a copy of which you may download from 
+# http://www.tdg-seville.info/License.html
+
+activity.pictures				=	Imágenes
+activity.title					=	Título
+activity.description			=	Descripción
+activity.day					=	Día
+activity.startTime				=	Hora de comienzo actividad
+activity.endTime				=	Hora fin de la actividad
+activity.availableSeats			=	Número de sitios disponibles
+activity.listOfTrainers			=	Entrenadores
+activity.listGym				=	Gimnasio
+activity.cancel					= Volver a la página principal
+
+
+searchTemplate.keyword			= Clave de búsqueda
+searchTemplate.day				= Día
+searchTemplate.time				= Hora
+searchTemplate.search			= Buscar
+
+search.empty					= -----
+search.monday					= Lunes
+search.tuesday					= Martes
+search.wednesday				= Miercoles
+search.thrusday					= Jueves
+search.friday					= Viernes
+search.saturday					= Sábado
+search.sunday					= Domingo
+
+hour							= HH:mm
+searchTemplateForm.commit.error	= No se pudo realizar esta operación

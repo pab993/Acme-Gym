@@ -1,0 +1,86 @@
+
+package services;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import repositories.GymRepository;
+import domain.Activity;
+import domain.Customer;
+import domain.Gym;
+import domain.Manager;
+
+@Service
+@Transactional
+public class GymService {
+
+	//Managed Repository =============================================================================
+
+	@Autowired
+	private GymRepository	gymRepository;
+
+	//Other services =================================================================================
+
+	@Autowired
+	private ManagerService	managerService;
+
+
+	//Simple CRUD methods ============================================================================
+
+	public Gym create() {
+		Gym result;
+
+		Manager manager = managerService.findByPrincipal();
+
+		Assert.isTrue(manager != null);
+
+		result = new Gym();
+
+		Collection<Activity> activities = new ArrayList<Activity>();
+		Collection<Customer> customers = new ArrayList<Customer>();
+		result.setActivities(activities);
+		result.setClosed(false);
+		result.setCustomers(customers);
+		result.setManager(manager);
+
+		return result;
+	}
+
+	public Gym save(Gym gym) {
+		Assert.notNull(gym);
+
+		Manager manager = managerService.findByPrincipal();
+
+		Assert.isTrue(gym.getManager().equals(manager));
+		Gym result;
+
+		result = gymRepository.save(gym);
+
+		return result;
+	}
+
+	//Other Business Methods =========================================================================
+
+	public Collection<Gym> findAllNotClosed() {
+
+		Collection<Gym> gyms;
+		gyms = gymRepository.findAllNotClosed();
+
+		return gyms;
+	}
+
+	public Collection<Gym> findGymByActivity(int activityId) {
+
+		Collection<Gym> gyms;
+		gyms = gymRepository.findGymByActivity(activityId);
+
+		return gyms;
+	}
+
+}

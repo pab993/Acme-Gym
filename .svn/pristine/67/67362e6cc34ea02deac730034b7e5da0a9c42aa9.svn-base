@@ -1,0 +1,85 @@
+
+package controllers;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import services.TrainerService;
+import domain.Trainer;
+import forms.TrainerForm;
+
+@Controller
+@RequestMapping("/trainer")
+public class TrainerController extends AbstractController {
+
+	// Constructors -----------------------------------------------------------
+
+	public TrainerController() {
+		super();
+	}
+
+
+	//Services
+	// ============================================================================
+
+	@Autowired
+	private TrainerService	trainerService;
+
+
+	//Edition
+	//=============================================================================
+
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public ModelAndView edit() {
+
+		ModelAndView result;
+		result = new ModelAndView("trainer/edit");
+
+		result.addObject("trainerForm", new TrainerForm());
+
+		return result;
+	}
+
+	// Save
+	// ====================================================================
+
+	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final TrainerForm trainerForm, final BindingResult binding) {
+		ModelAndView result;
+		Trainer trainer;
+
+		try {
+			trainer = trainerService.reconstruct(trainerForm, binding);
+
+			if (binding.hasErrors())
+				result = this.createEditModelAndView(trainerForm, "trainer.save.error");
+			else {
+				result = new ModelAndView("redirect:/welcome/index.do");
+				trainer = this.trainerService.save(trainer);
+
+			}
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(trainerForm, "trainer.save.error");
+		}
+
+		return result;
+	}
+
+	// Ancilliary methods
+	// =================================================================================================
+
+	private ModelAndView createEditModelAndView(TrainerForm trainerForm, String message) {
+
+		ModelAndView resul = new ModelAndView("trainer/edit");
+
+		resul.addObject("trainerForm", trainerForm);
+		resul.addObject("message", message);
+		return resul;
+	}
+}
